@@ -1,0 +1,1 @@
+JSONb-layer is library providing a thin JSON serialization/deserialization layer, based on the JSONb library. It assumes the input is UTF8-encoded.

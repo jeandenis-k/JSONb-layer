@@ -1,0 +1,31 @@
+name                          : JSONb-layer
+version                       : 0.1
+category                      : Text
+license                       : BSD3
+author                        : Jean-Denis Koeck
+maintainer                    : jdkoeck@gmail.com
+homepage                      : http://github.com/jdck/JSONb-layer
+synopsis                      : Thin JSON serialization/deserialization layer based
+                                on the JSONb library
+description                   :
+  This JSON layer converts between haskell values and JSON values.
+  It is meant to be used as an interoperability layer between your Haskell program
+  and the outside world.
+  This library is based on two classes, "FromJson" and "ToJson". The typical user
+  of this library will define instances of these classes for his own data structures,
+  using various helper functions and combinators.
+
+cabal-version                 : >= 1.2.3
+build-type                    : Simple
+extra-source-files            : README
+
+library
+  ghc-options                 : -funbox-strict-fields -W
+  build-depends               : base >= 2 && <= 5
+                              , containers
+                              , bytestring >= 0.9
+                              , monads-tf ==0.1.0.0
+                              , JSONb
+                              , bytestring-trie >= 0.1.4
+  exposed-modules             : Text.JSONb.Layer
+                                Text.JSONb.Layer.Reader
