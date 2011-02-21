@@ -263,6 +263,12 @@ instance (Num a, Read a) => FromJSON () a where
           Just i  -> Right i
           Nothing -> Left $ "Not a number: " ++ B.unpack str
 
+-- ** Void
+
+instance ToJSON () () where
+    toJsonWith () () = JSONb.Null
+
+
 -- * Helpers
 
 maybeRead :: (Read a) => String -> Maybe a
