@@ -61,6 +61,8 @@ import qualified Data.ByteString.Char8 as B
 import Data.ByteString.Char8 (ByteString)
 import qualified Data.Set as Set
 
+import qualified Data.Text as T
+import qualified Data.Text.Encoding as TE
 import Text.JSONb (JSON)
 import qualified Text.JSONb as JSONb
 
@@ -231,6 +233,9 @@ instance ToJSON () String where
   
 instance FromJSON () String where
   readJsonWith () js = B.unpack <$> readJsonWith () js
+
+instance ToJSON () T.Text where
+  toJsonWith () = toJson . TE.encodeUtf8
 
 -- ** Numerals
 
