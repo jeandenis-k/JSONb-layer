@@ -239,8 +239,14 @@ instance ToJSON () T.Text where
 
 -- ** Numerals
 
-instance Integral a => ToJSON () a where
-  toJsonWith () = JSONb.Number . (% 1) . fromIntegral
+integralToJson :: Integral a => a -> JSON
+integralToJson = JSONb.Number . (% 1) . fromIntegral
+
+instance ToJSON () Int where
+  toJsonWith () = integralToJson
+  
+instance ToJSON () Integer where
+  toJsonWith () = integralToJson
 
 -- TODO: Replace by some sort of TypeError ...
 instance (Num a, Read a) => FromJSON () a where
