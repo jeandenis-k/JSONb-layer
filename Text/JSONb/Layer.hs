@@ -59,6 +59,7 @@ import Data.Ratio
 import "monads-tf" Control.Monad.Reader
 import qualified Data.ByteString.Char8 as B
 import Data.ByteString.Char8 (ByteString)
+import qualified Data.Set as Set
 
 import Text.JSONb (JSON)
 import qualified Text.JSONb as JSONb
@@ -198,6 +199,14 @@ instance FromJSON env a => FromJSON env [a] where
 
 instance ToJSON env a => ToJSON env [a] where
   toJsonWith env xs = JSONb.Array (map (toJsonWith env) xs)
+
+-- ** Sets
+  
+instance ToJSON env a => ToJSON env (Set.Set a) where
+  toJsonWith env set = toJsonArr $ map (toJsonWith env) (Set.toList set)
+  
+instance (FromJSON env a, Ord a) => FromJSON env (Set.Set a) where
+    fromJsonWith env = Set.fromList <$> fromJsonArray (fromJsonWith env)  
 
 -- ** Booleans
 
