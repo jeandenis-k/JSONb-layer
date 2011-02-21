@@ -13,7 +13,46 @@
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
-module Text.JSONb.Layer where
+module Text.JSONb.Layer
+    (
+      ToJSON(..)
+    , FromJSON(..)
+      
+    , BiJSON
+      
+    , JsReader
+    , runJsReader
+      
+    , JsResult(..)
+    , JsContext(..)
+      
+    , toJson
+    , toJsonObj
+    , toJsonArr
+      
+    , fromJson
+    , readJson
+      
+    , jsError
+    , jsNotFound
+    , (~>)
+    , whenNotFound
+    , ifNotFound
+      
+    , readJsonByteStringWith
+    , readJsonByteString
+      
+    , readJsonFileWith
+    , readJsonFile
+      
+    , fromJsonWithReadClass
+      
+    , fromJsonArray
+      
+    , maybeToJson
+    , maybeToJsonWith      
+    , maybeFromJson
+    ) where
 
 import Control.Applicative
 import Data.Ratio
@@ -70,6 +109,9 @@ toJson = toJsonWith ()
 -- | Make a json object
 toJsonObj :: [(ByteString, JSON)] -> JSON
 toJsonObj = JSONb.KeyValues
+
+toJsonArr :: [JSON] -> JSON
+toJsonArr = JSONb.Array
 
 
 ------------------------------------------------------------------------------
