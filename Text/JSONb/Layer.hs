@@ -56,6 +56,7 @@ module Text.JSONb.Layer
 
 import Control.Applicative
 import Data.Ratio
+import Data.String
 import "monads-tf" Control.Monad.Reader
 import qualified Data.ByteString.Char8 as B
 import Data.ByteString.Char8 (ByteString)
@@ -275,3 +276,6 @@ maybeRead :: (Read a) => String -> Maybe a
 maybeRead s = case reads s of
         [(x, [])] -> Just x
         _         -> Nothing
+
+instance IsString JSON where
+    fromString = JSONb.String . B.pack
