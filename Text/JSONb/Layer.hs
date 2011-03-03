@@ -184,7 +184,7 @@ maybeFromJson reader = do
   context <- ask
   case runReaderT reader context of
     JsOk a          -> return (Just a)
-    JsNotFound path -> lift $ JsNotFound path
+    JsNotFound _path -> return Nothing
     JsError errCtx errMsg ->    
       case jscJSON errCtx of
         JSONb.Null -> return Nothing
